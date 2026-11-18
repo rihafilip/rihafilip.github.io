@@ -24,4 +24,3 @@ exclude:
   - flake.nix
   - flake.lock
   - scripts
-  - publications

@@ -10,7 +10,7 @@ at the Faculty of Information Technology, Czech Technical University in Prague.
 
 {% assign recent = site.data.publications | sort: "year" | reverse %}
 {% for p in recent limit: 3 %}
-- [{{ p.title }}]({{ '/publications/' | append: p.slug | append: '/' | relative_url }}), {{ p.venue }}
+- [{{ p.title }}]({{ '/publications/' | relative_url | append: '#' | append: p.slug }}), {{ p.venue }}
 {% endfor %}
 
 [All publications →]({{ '/publications/' | relative_url }})

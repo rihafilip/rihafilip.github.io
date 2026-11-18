@@ -22,7 +22,7 @@ permalink: /cv/
 ## Publications and talks
 {% assign pubs = site.data.publications | sort: "year" | reverse %}
 {% for p in pubs %}
-- {{ p.authors | map: "name" | join: ", " }} ({{ p.year }}). [*{{ p.title }}*]({{ '/publications/' | append: p.slug | append: '/' | relative_url }}). {{ p.venue }}.{% if p.type == "Talk" %} Talk.{% endif %}
+- {{ p.authors | map: "name" | join: ", " }} ({{ p.year }}). [*{{ p.title }}*]({{ '/publications/' | relative_url | append: '#' | append: p.slug }}). {{ p.venue }}.{% if p.type == "Talk" %} Talk.{% endif %}
 {% endfor %}
 
 ## Teaching

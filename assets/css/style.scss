@@ -67,48 +67,30 @@ a:hover { color: darken($link, 12%); }
 
 // Pages without the sidebar (publication details) use the full wrapper width
 
-.no-sidebar section,
-.no-sidebar footer { float: none; position: static; width: auto; }
-
 // CV
 
 .cv-meta { color: $muted; }
 
-// Publication gallery
+// Publication list, one entry under another
 
-.pub-grid {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-}
-.pub-grid + .pub-year { margin-top: 3rem; }
-.pub-card a { display: block; text-decoration: none; }
-.pub-card img,
-.pub-placeholder {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top;
-  border: 1px solid $border; border-radius: 4px;
-}
-.pub-placeholder {
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  box-sizing: border-box; padding: .75rem; text-align: center;
-  background: $soft; color: $muted; font-size: .9em;
-}
-.pub-placeholder-type { font-weight: 600; color: $head; }
-.pub-title { display: block; font-weight: 600; margin-top: .4rem; line-height: 1.3; }
-.pub-sub   { display: block; font-size: .85em; color: $muted; }
+.pub-list { margin: 0; padding: 0; list-style: none; }
+.pub-list + .pub-year { margin-top: 3rem; }
+.pub-entry { margin: 0 0 1.5rem; }
+.pub-entry summary { list-style: none; cursor: pointer; position: relative; padding-left: 1.25em; }
+.pub-entry summary::-webkit-details-marker { display: none; }
+// U+25B8/U+25BE rather than ▶/▼, which some platforms render as emoji
+.pub-entry summary::before { content: "\25B8"; position: absolute; left: 0; color: $link; line-height: 1.5; }
+.pub-entry details[open] summary::before { content: "\25BE"; }
+.pub-details { padding-left: 1.25em; }
+.pub-entry-title { margin: 0; line-height: 1.25; color: $link; }
+.pub-entry summary:hover .pub-entry-title { color: darken($link, 12%); }
+.pub-venue,
+.pub-authors { display: block; line-height: 1.35; }
+.pub-venue { color: $muted; }
+.pub-authors { font-size: 1.05em; }
+.pub-details { margin-top: .75rem; }
 
-// Publication detail: preview on the left, everything else on the right
-
-.pub { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 2.5rem; align-items: start; }
-.pub-no-preview { grid-template-columns: minmax(0, 1fr); }
-.pub-preview img { display: block; width: 100%; border: 1px solid $border; }
-.pub-body h1 { margin: 0 0 .25rem; line-height: 1.2; }
-.pub-venue { color: $muted; margin: 0 0 1rem; }
-.pub-authors { margin: 0 0 .25rem; font-size: 1.05em; }
-.pub-affiliations { list-style: none; padding: 0; margin: 0 0 1.25rem; font-size: .9em; color: $muted; }
-.pub-affiliations li { margin: 0; }
-
-.pub-buttons { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pub-buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 .75rem; }
 .btn {
   display: inline-flex; align-items: center; gap: .5em;
   padding: .4rem .9rem; border-radius: 4px;
@@ -117,10 +99,6 @@ a:hover { color: darken($link, 12%); }
 .btn,
 .btn:hover { background: $link; color: #fff; }
 .btn:hover { background: darken($link, 12%); font-weight: 600; }
-@media screen and (max-width: 720px) {
-  .pub { grid-template-columns: minmax(0, 1fr); }
-  .pub-preview img { max-width: 320px; }
-}
 
 // Dark mode, following the visitor's system setting
 
@@ -136,12 +114,11 @@ a:hover { color: darken($link, 12%); }
   blockquote           { border-left-color: #2a2d34; color: #9aa0a6; }
   th, td               { border-bottom-color: #2a2d34; }
   hr                   { background: #2a2d34; }
-  .pub-sub, small, .cv-meta,
-  .pub-venue, .pub-affiliations { color: #9aa0a6; }
-  .pub-card img,
-  .pub-preview img     { border-color: #2a2d34; }
-  .pub-placeholder     { background: #1a1d23; border-color: #2a2d34; color: #9aa0a6; }
-  .pub-placeholder-type { color: #f0f0f0; }
+  small, .cv-meta,
+  .pub-venue           { color: #9aa0a6; }
+  .pub-entry-title,
+  .pub-entry summary::before { color: #6cb0ff; }
+  .pub-entry summary:hover .pub-entry-title { color: #9ccaff; }
   .btn, .btn:hover     { background: #6cb0ff; color: #111418; }
   .btn:hover           { background: #9ccaff; }
 }

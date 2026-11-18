@@ -8,10 +8,7 @@
     {% include head-custom.html %}
   </head>
   <body>
-    {% assign sidebar = true %}
-    {% if page.layout == "publication" %}{% assign sidebar = false %}{% endif %}
-    <div class="wrapper{% unless sidebar %} no-sidebar{% endunless %}">
-      {% if sidebar %}
+    <div class="wrapper">
       <header>
         {% if site.logo %}
           <a href="{{ '/' | relative_url }}">
@@ -30,7 +27,6 @@
           {% endfor %}
         </ul>
       </header>
-      {% endif %}
 
       <section>
         <nav aria-label="Main">

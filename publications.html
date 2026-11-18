@@ -9,23 +9,35 @@ permalink: /publications/
 <h2 class="pub-year">{{ year.name }}</h2>
 <hr>
 
-<ul class="pub-grid">
+<ul class="pub-list">
 {% for p in year.items %}
-  <li class="pub-card">
-    <a href="{{ '/publications/' | append: p.slug | append: '/' | relative_url }}">
-      {% if p.file %}
-        {% assign thumb = p.file | replace: ".pdf", ".png" | prepend: "/publications/thumbs/" %}
-        <img src="{{ thumb | relative_url }}" alt="" loading="lazy">
-      {% else %}
-        <span class="pub-placeholder" aria-hidden="true">
-          <span class="pub-placeholder-type">{{ p.type }}</span>
-          <span>{{ p.venue }}</span>
-        </span>
-      {% endif %}
-      <span class="pub-title">{{ p.title }}</span>
-    </a>
-    <span class="pub-sub">{{ p.venue }}</span>
+  <li class="pub-entry" id="{{ p.slug }}">
+    <details>
+      <summary>
+        <h3 class="pub-entry-title">{{ p.title }}</h3>
+        <span class="pub-venue">{{ p.venue }}{% if p.location %}, {{ p.location }}{% endif %}</span>
+        <span class="pub-authors">{{ p.authors | map: "name" | join: ", " }}</span>
+      </summary>
+
+      <div class="pub-details">
+        {% if p.file or p.paper or p.doi or p.artifact or p.slides %}
+        <p class="pub-buttons">
+          {% if p.file %}<a class="btn" href="{{ p.file | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>View PDF</a>{% endif %}
+          {% if p.paper or p.doi %}<a class="btn" href="{% if p.paper %}{{ p.paper }}{% else %}https://doi.org/{{ p.doi }}{% endif %}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>Paper</a>{% endif %}
+          {% if p.artifact %}<a class="btn" href="{{ p.artifact }}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Artifact</a>{% endif %}
+          {% if p.slides %}<a class="btn" href="{{ p.slides | prepend: '/media/' | relative_url }}"><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i>Slides</a>{% endif %}
+        </p>
+        {% endif %}
+        {{ p.abstract | markdownify }}
+      </div>
+    </details>
   </li>
 {% endfor %}
 </ul>
 {% endfor %}
+
+<script>
+  // Links like /publications/#<slug> open that entry
+  const linked = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  linked?.querySelector("details")?.setAttribute("open", "");
+</script>

@@ -19,22 +19,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+
+      # Toolchain comes from flake.nix / flake.lock, same as locally
+      - uses: cachix/install-nix-action@v31
+      - uses: nix-community/cache-nix-action@v6
         with:
-          ruby-version: "3.3"        # same as ruby_3_3 in flake.nix
-          bundler-cache: true
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          gc-max-store-size-linux: 1G
+
+      # Native gems are compiled against the dev shell's libraries,
+      # so they must be rebuilt whenever flake.lock changes
+      - uses: actions/cache@v4
+        with:
+          path: vendor/bundle
+          key: gems-${{ runner.os }}-${{ hashFiles('flake.lock', 'Gemfile.lock') }}
+
+      - name: Install gems
+        run: nix develop --command bundle install
       - name: Generate missing thumbnails
-        run: |
-          sudo apt-get update && sudo apt-get install -y poppler-utils
-          bash scripts/make-thumbs.sh
+        run: nix develop --command bash scripts/make-thumbs.sh
       - id: pages
         uses: actions/configure-pages@v5
       - name: Build
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: nix develop --command bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Validate
-        run: bundle exec htmlproofer ./_site --disable-external
+        run: nix develop --command bundle exec htmlproofer ./_site --disable-external
       - uses: actions/upload-pages-artifact@v3
 
   deploy:

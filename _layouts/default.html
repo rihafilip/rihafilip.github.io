@@ -8,7 +8,10 @@
     {% include head-custom.html %}
   </head>
   <body>
-    <div class="wrapper">
+    {% assign sidebar = true %}
+    {% if page.layout == "publication" %}{% assign sidebar = false %}{% endif %}
+    <div class="wrapper{% unless sidebar %} no-sidebar{% endunless %}">
+      {% if sidebar %}
       <header>
         {% if site.logo %}
           <a href="{{ '/' | relative_url }}">
@@ -18,6 +21,18 @@
         <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
         <p>{{ site.description }}</p>
 
+        <ul class="profile-links">
+          {% for l in site.data.profile.links %}
+            <li><a href="{{ l.url | relative_url }}">
+              {%- if l.icon %}<i class="{{ l.icon }}" aria-hidden="true"></i>{% endif -%}
+              <span>{{ l.label }}</span>
+            </a></li>
+          {% endfor %}
+        </ul>
+      </header>
+      {% endif %}
+
+      <section>
         <nav aria-label="Main">
           <ul class="site-nav">
             {% for path in site.header_pages %}
@@ -30,20 +45,11 @@
           </ul>
         </nav>
 
-        <ul class="profile-links">
-          {% for l in site.data.profile.links %}
-            <li><a href="{{ l.url | relative_url }}">{{ l.label }}</a></li>
-          {% endfor %}
-        </ul>
-      </header>
-
-      <section>
         {{ content }}
       </section>
 
       <footer>
-        <p>© {{ site.time | date: "%Y" }} {{ site.title }} · updated {{ site.time | date: "%-d %b %Y" }}</p>
-        <p><small>Theme: <a href="https://github.com/pages-themes/minimal">Minimal</a> by orderedlist</small></p>
+        <p><small>Based on <a href="https://github.com/pages-themes/minimal">Minimal</a> by orderedlist</small></p>
       </footer>
     </div>
   </body>

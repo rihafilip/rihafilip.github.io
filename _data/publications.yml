@@ -1,97 +1,112 @@
-# One entry per publication, listed on /publications/ and linkable as
-# /publications/#<slug>. A PDF, if any, goes in media/ and is named by the
-# `file` field; slides likewise by `slides`.
+# A reference is one of { doi: doi number}, { link: html link }
 #
-# Fields: slug, title, authors (name), venue, location?,
-# year, type, tags, file?, slides?, paper? (URL, defaults to the DOI), doi?,
-# artifact? (URL), bibtex_type, abstract (Markdown)
+# Format:
+#   slug:
+#     file: optional; if true - at media/'slug'.pdf; if string - at media/'the-string'
+#     presentation: optional; if true - at media/'slug'-presentation.pdf; if string - at media/'the-string'
+#     artifact: optional; reference
+#     title: string
+#     authors: list of strings of authors
+#     venue: string
+#     year: int
+#     reference: optional; reference
+#     type: Paper | Extended Abstract | Talk | Poster
+#     no_bib: optional; if true, do not add to bib
+#     bib_type: for bib database
+#     meta: optional; other bib fields - dictionary of str -> str. Has precedence over the other fields
+#     abstract: The full abstract
 
-- slug: type-feedback-jit-2026
-  title: "Characterizing Type Feedback in Just-in-Time Compilation"
-  authors:   # TODO: complete author list
-    - name: Filip Říha
-  venue: ECOOP'26
-  year: 2026
-  type: Paper
-  tags: [JIT compilers, type feedback]
-  bibtex_type: inproceedings
-  abstract: |
-    TODO: abstract.
-
-- slug: r-benchmarks-2026
-  title: "What Do R Benchmarks Measure?"
-  authors:   # TODO: complete author list
-    - name: Filip Říha
+2026-vmil-r-benchmarks:
+  file: true
+  artifact: { link: github.com/PRL-PRG/r-benchmarks }
+  title: "What Do R Benchmarks Measure: Toward a Performance-Characterized Benchmark Suite for R"
+  authors:
+    - Matěj Kocourek
+    - Filip Říha
+    - Oliver Tušla
+    - Pierre Donat-Bouillud
+    - Filip Křikava
+    - Jan Vitek
   venue: VMIL'26
   year: 2026
+  reference: { doi: 10.1145/3840562.3844972 }
   type: Paper
-  tags: [benchmarking, R]
-  bibtex_type: inproceedings
+  bib_type: inproceedings
   abstract: |
-    TODO: abstract.
+    Many programming language implementations have a benchmark suite that consists of a fixed set of programs with a harness and clear maintenance. R has none. Instead, R implementations are evaluated on ad hoc sets of programs and harnesses with different timing conventions. This paper is a step toward a benchmarking suite for R. We collect 118 R programs from 8 repositories and put them under a single harness. Next, we characterize their performance profiles, which show the share of the run spent in different regions of the R virtual machine (e.g., bytecode interpreter, memory management, builtin functions). This allows us to classify benchmarks by what they exercise so we can create suites that target a specific use such as compiler optimizations. On three R compilers, the speedups follow the profiles. They concentrate in the interpreter-bound programs and vanish in the ones dominated by native code. The profiles also cut the cost of running a suite. Dropping the 53 programs dominated by native code or builtins leaves 65 programs and saves 51.7% of the running time of the corpus.
 
-- slug: bench-2026
+2026-splash-issta-tool-bench:
+  file: true
+  artifact: { link: github.com/PRL-PRG/bench }
   title: "bench: A Programmable Command-Line Framework for Complex Benchmarking Workflows"
-  authors:   # TODO: complete author list
-    - name: Filip Říha
+  authors:
+    - Filip Říha
+    - Filip Křikava
   venue: SPLASH-ISSTA'26 Tool Demonstrations
   year: 2026
-  type: Tool Demo
-  tags: [benchmarking, tools]
-  bibtex_type: inproceedings
+  reference: { doi: 10.1145/3837729.3840502 }
+  type: Paper
+  bib_type: inproceedings
+  meta:
+    series: "{SPLASH Companion '26}"
   abstract: |
-    TODO: abstract.
+    Benchmarking provides much of the feedback that drives systems and language research, yet sound benchmarking is hard. As experiments grow, added programs, configurations, custom metrics, warmup, failures, and machine noise can all mislead. We present bench, a tool that keeps simple measurements simple and lets complex experiments scale without leaving a general-purpose language. It offers a command-line interface for ad-hoc runs and a small, almost declarative Python API for repeatable experiments, both backed by one engine. A builder API resolves a suite of benchmarks lazily against a typed context, so a single script can be parametrized from the command line, discover its workloads at run time, and treat process benchmarks and in-process harnesses through one pipeline. We have successfully used it to simplify the benchmarking infrastructure for our R just-in-time compiler, used it in classes benchmarking student virtual machines, and driving established suites such as Renaissance or SPEC.
 
-- slug: ffi-native-code-2026
-  title: "Seeing Through the FFI: Analyzing Native Code in Dynamic Languages"
-  # TODO: dummy data below, replace with the real values
+2026-ecoop-feedback-in-jits:
+  file: true
+  artifact: { doi: 10.4230/DARTS.12.1.4 }
+  title: "Characterizing Type Feedback in Just-in-Time Compilation"
   authors:
-    - name: Filip Říha
-    - name: Jane Doe
-    - name: John Smith
+    - Sebastián Krynski
+    - Filip Říha
+    - Filip Křikava
+    - Jan Vitek
+  venue: ECOOP'26
+  year: 2026
+  reference: { doi: 10.4230/LIPIcs.ECOOP.2026.16 }
+  type: Paper
+  bib_type: inproceedings
+  abstract: |
+    Just-in-time (JIT) compilers leverage type feedback to optimize dynamic languages by recording runtime observations during interpretation and using them to generate specialized code. However, this recording process introduces significant execution time overhead to program warmup. This paper presents a characterization study of how feedback information is utilized by JIT compilers, providing motivation for future work on reducing recording overhead. We instrument the Ř compiler for the R language to track feedback slot usage throughout compilation, analyzing well-known benchmarks and real-world programs. Our measurements reveal that recording adds overhead to the interpreter up to 1.6× (mean 1.2×), yet at least 59% of non-empty slots are not used by the compiler. A large fraction of these unused slots can be attributed to dead code that the compiler eliminated. Most of the remaining slots are type-stable - meaning the inferred type matches the observed type - making speculation futile. To quantify the potential for improvement, we evaluate two oracle-based configurations that establish upper bounds on achievable reduction: a conservative set approach that preserves optimization quality while improving warmup, and an optimistic set approach that sacrifices some compiled code performance for faster interpretation.
+
+2026-ecoop-docsym:
+  file: true
+  presentation: true
+  title: "Seeing Through the FFI: Analyzing Native Code in Dynamic Languages"
+  authors:
+    - Filip Říha
   venue: ECOOP'26 Doctoral Symposium
-  location: Brussels, Belgium
   year: 2026
   type: Talk
-  tags: [FFI, static analysis, dynamic languages]
-  file: main.pdf
-  slides: main.pdf
-  paper: "https://example.org/paper"
-  artifact: "https://example.org/artifact"
-  bibtex_type: misc
+  bib_type: misc
   abstract: |
-    Dynamic languages rely on a foreign function interface to call native
-    libraries, but analyses of the language runtime stop at that boundary.
-    This is placeholder text for the abstract, long enough to show how a
-    paragraph wraps next to the preview.
+    Dynamic languages such as Python, Ruby, or R rely heavily on native C/C++ functions using a foreign function interface. While they significantly speed up baseline performance, these functions are opaque to a Just-in-time compiler — parameter and return types, side effects, and argument counts are not exposed for optimization. We propose an approach that analyzes native code in the context of the host VM, opening up the semantics of native code without the need for manual transformation. From this we identify three use cases: a) inferring precise types and side effects for JIT specialization, b) modeling the dynamic language semantics in the same IR, enabling whole-program analysis, and c) extracting specialized native code slices that only capture the main logic for subsets of inputs.
 
-    A second paragraph, to check that *Markdown* in the abstract renders.
-
-- slug: feedback-information-jit-2025
+2025-programming-lightning-talk:
   title: "Understanding Feedback Information in Just-in-Time Compilers"
-  authors:   # TODO: complete author list
-    - name: Filip Říha
+  authors:
+    - Filip Říha
   venue: "‹Programming›'25 Lightning Talks"
   year: 2025
   type: Talk
-  tags: [JIT compilers, type feedback]
-  bibtex_type: misc
+  bib_type: misc
   abstract: |
-    TODO: abstract.
+    Feedback information is used by Just-in-time compilers as the piece that glues together the runtime and the static worlds by enriching static type information with runtime observations. The compiler can speculate on the observed behavior, which is crucial for unlocking a number of optimizations. The more dynamic features a language has, the more relevant the runtime information becomes when generating performant code. This is the case with R, a highly dynamic programming language that combines delayed evaluation and side effects with first-class environments and full reflective capabilities that can even access and modify the state of stack frames at any time. However, recording feedback information considerably impacts the execution and memory of an interpreter, which leads to the question: Is all the information recorded really needed? In this study, we look at how the feedback information is used in Ř, a just-in-time compiler for the language R. We perform a study on a set of well-known benchmarks and a few real-world programs, reporting on the feedback usage and categorizing how the information is used (or not used) during a compilation.
 
-- slug: reducing-feedback-pollution-2024
+2024-vmil-feedback-pollution:
+  file: true
+  artifact: { link: gitlab.com/rirvm/splitfeedback-experiments }
   title: "Reducing Feedback Pollution"
   authors:
-    - name: S. Krynski
-    - name: M. Štěpánek
-    - name: Filip Říha
-    - name: F. Křikava
-    - name: J. Vitek
+    - Sebastián Krynski
+    - Michal Štěpánek
+    - Filip Říha
+    - Filip Křikava
+    - Jan Vitek
   venue: VMIL'24
   year: 2024
+  reference: { doi: 10.1145/3689490.3690404 }
   type: Paper
-  tags: [JIT compilers, type feedback, R]
-  doi: 10.1145/3689490.3690404
-  bibtex_type: inproceedings
+  bib_type: inproceedings
   abstract: |
-    TODO: abstract.
+    Just-in-time compilers enhance the performance of future invocations of a function by generating code tailored to past behavior. To achieve this, compilers use a data structure, often referred to as a feedback vector, to record information about each function’s invocations. However, over time, feedback vectors tend to become less precise, leading to lower-quality code – a phenomenon known as feedback vector pollution. This paper examines feedback vector pollution within the context of a compiler for the R language. We provide data, discuss an approach to reduce pollution in practice, and implement a proof-of-concept implementation of this approach. The preliminary results of the implementation indicate ∼30% decrease in polluted compilations and ∼37% decrease in function pollution throughout our corpus.

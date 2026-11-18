@@ -9,8 +9,8 @@ at the Faculty of Information Technology, Czech Technical University in Prague.
 ## Recent publications
 
 {% include pub-years.html %}
-{% assign shown = 0 %}
-{% for year in pub_years %}{% for entry in site.data.publications %}{% assign p = entry[1] %}{% if p.info.year == year and shown < 3 %}{% assign shown = shown | plus: 1 %}
+{% assign min_year = site.time | date: "%Y" | minus: 1 %}
+{% for year in pub_years %}{% if year < min_year %}{% break %}{% endif %}{% for entry in site.data.publications %}{% assign p = entry[1] %}{% if p.info.year == year %}
 - [{{ p.title }}]({{ '/publications/' | relative_url | append: '#' | append: entry[0] }}){% if p.info.venue %}, {{ p.info.venue }}{% endif %}
 {% endif %}{% endfor %}{% endfor %}
 

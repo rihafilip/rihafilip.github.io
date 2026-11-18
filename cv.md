@@ -21,7 +21,7 @@ permalink: /cv/
 {%- endfor %}
 {% endfor %}
 
-## Publications and talks
+## Publications and Talks
 {% include pub-years.html %}
 {% for year in pub_years %}{% for entry in site.data.publications %}{% assign p = entry[1] %}{% if p.info.year == year %}
 - {{ p.authors | join: ", " }} ({{ p.info.year }}). [*{{ p.title }}*]({{ '/publications/' | relative_url | append: '#' | append: entry[0] }}).{% if p.info.venue %} {{ p.info.venue }}.{% endif %}{% if p.info.type == "Talk" %} Talk.{% endif %}
@@ -32,7 +32,7 @@ permalink: /cv/
 **{{ t.role }}**, {{ t.institution }} <span class="cv-meta">({{ t.years }})</span>{% if t.note %}<br>{{ t.note }}{% endif %}
 {% endfor %}
 
-## Service
-{% for s in site.data.cv.service %}
+## Other Activities
+{% for s in site.data.cv.other %}
 - {{ s.role }}, {{ s.event }}
 {% endfor %}

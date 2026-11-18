@@ -34,8 +34,3 @@ permalink: /cv/
 {% for s in site.data.cv.service %}
 - {{ s.role }}, {{ s.event }}
 {% endfor %}
-
-{% if site.data.cv.skills %}
-## Skills
-{{ site.data.cv.skills | join: " · " }}
-{% endif %}

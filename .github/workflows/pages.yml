@@ -20,7 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Toolchain comes from flake.nix / flake.lock, same as locally
       - uses: cachix/install-nix-action@v31
       - uses: nix-community/cache-nix-action@v6
         with:
@@ -37,8 +36,6 @@ jobs:
 
       - name: Install gems
         run: nix develop --command bundle install
-      - name: Generate missing thumbnails
-        run: nix develop --command bash scripts/make-thumbs.sh
       - id: pages
         uses: actions/configure-pages@v5
       - name: Build

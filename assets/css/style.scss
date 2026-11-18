@@ -2,15 +2,10 @@
 ---
 @import "jekyll-theme-minimal";
 
-// Your own palette (Minimal hard-codes its colors, so we define ours here)
 $text:   #3b3b3b;
 $head:   #1f2328;
 $muted:  #6b7280;
-$border: #e5e5e5;
 $link:   #0b5cad;
-$soft:   #f4f6fa;
-
-// Sidebar: profile and navigation
 
 header .avatar {
   width: 150px; aspect-ratio: 1; object-fit: cover;
@@ -29,10 +24,10 @@ header .profile-links li {
 }
 header .profile-links a {
   display: inline-block; text-align: left; padding: .15rem 0;
-  font-size: 1em; color: $link;
+  font-size: 1.5em; color: $link;
 }
-
-// Page navigation, on top of the content column
+// The doubled `monospace` stops browsers from shrinking the generic monospace font
+header .contact-email { font-family: monospace, monospace; font-size: .9em; }
 
 .site-nav {
   display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem 1.25rem;
@@ -40,17 +35,12 @@ header .profile-links a {
 }
 .site-nav a { font-weight: 600; color: $link; text-decoration: none; }
 .site-nav a[aria-current="page"] { color: $head; }
-header .profile-links a { font-size: 1.5em; }
-// The doubled `monospace` stops browsers from shrinking the generic monospace font
-header .contact-email { font-family: monospace, monospace; font-size: .9em; }
-
-// Fonts
 
 body {
   font-family: "Source Sans 3", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: $text;                    // Minimal's default gray is quite light
+  color: $text;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Source Serif 4", Georgia, serif;
@@ -61,19 +51,12 @@ a       { color: $link; }
 a:hover { color: darken($link, 12%); }
 
 // Wider content column on large screens only, keeping Minimal's mobile layout
-
 @media screen and (min-width: 1100px) {
   .wrapper { width: 980px; }
   section  { width: 660px; }
 }
 
-// Pages without the sidebar (publication details) use the full wrapper width
-
-// CV
-
 .cv-meta { color: $muted; }
-
-// Publication list, one entry under another
 
 .pub-list { margin: 0; padding: 0; list-style: none; }
 .pub-list + .pub-year { margin-top: 3rem; }
@@ -83,14 +66,13 @@ a:hover { color: darken($link, 12%); }
 // U+25B8/U+25BE rather than ▶/▼, which some platforms render as emoji
 .pub-entry summary::before { content: "\25B8"; position: absolute; left: 0; color: $link; line-height: 1.5; }
 .pub-entry details[open] summary::before { content: "\25BE"; }
-.pub-details { padding-left: 1.25em; }
 .pub-entry-title { margin: 0; line-height: 1.25; color: $link; }
 .pub-entry summary:hover .pub-entry-title { color: darken($link, 12%); }
 .pub-venue,
 .pub-authors { display: block; line-height: 1.35; }
 .pub-venue { color: $muted; }
 .pub-authors { font-size: 1.05em; }
-.pub-details { margin-top: .75rem; }
+.pub-details { padding-left: 1.25em; margin-top: .75rem; }
 
 .pub-buttons { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 .75rem; }
 .btn {
@@ -100,9 +82,7 @@ a:hover { color: darken($link, 12%); }
 }
 .btn,
 .btn:hover { background: $link; color: #fff; }
-.btn:hover { background: darken($link, 12%); font-weight: 600; }
-
-// Dark mode, following the visitor's system setting
+.btn:hover { background: darken($link, 12%); }
 
 @media (prefers-color-scheme: dark) {
   body                 { background: #111418; color: #c9ccd1; }

@@ -20,7 +20,5 @@ header_pages:
   - publications.html
 
 exclude:
-  - README.md
   - flake.nix
   - flake.lock
-  - scripts

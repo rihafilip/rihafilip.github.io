@@ -8,10 +8,7 @@
     {% include head-custom.html %}
   </head>
   <body>
-    {% assign sidebar = true %}
-    {% if page.layout == "publication" %}{% assign sidebar = false %}{% endif %}
-    <div class="wrapper{% unless sidebar %} no-sidebar{% endunless %}">
-      {% if sidebar %}
+    <div class="wrapper">
       <header>
         {% if site.logo %}
           <img class="avatar" src="{{ site.logo | relative_url }}" alt="Photo of {{ site.title }}">
@@ -31,7 +28,6 @@
 
         <p class="contact-email">rihafili at fit dot cvut dot cz</p>
       </header>
-      {% endif %}
 
       <section>
         <nav aria-label="Main">
@@ -55,5 +51,4 @@
     </div>
   </body>
 </html>
-
 

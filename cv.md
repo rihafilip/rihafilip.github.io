@@ -20,10 +20,10 @@ permalink: /cv/
 {% endfor %}
 
 ## Publications and talks
-{% assign pubs = site.data.publications | sort: "year" | reverse %}
-{% for p in pubs %}
-- {{ p.authors | map: "name" | join: ", " }} ({{ p.year }}). [*{{ p.title }}*]({{ '/publications/' | relative_url | append: '#' | append: p.slug }}). {{ p.venue }}.{% if p.type == "Talk" %} Talk.{% endif %}
-{% endfor %}
+{% include pub-years.html %}
+{% for year in pub_years %}{% for entry in site.data.publications %}{% assign p = entry[1] %}{% if p.info.year == year %}
+- {{ p.authors | join: ", " }} ({{ p.info.year }}). [*{{ p.title }}*]({{ '/publications/' | relative_url | append: '#' | append: entry[0] }}).{% if p.info.venue %} {{ p.info.venue }}.{% endif %}{% if p.info.type == "Talk" %} Talk.{% endif %}
+{% endif %}{% endfor %}{% endfor %}
 
 ## Teaching
 {% for t in site.data.cv.teaching %}

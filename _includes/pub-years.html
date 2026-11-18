@@ -1,0 +1,8 @@
+{%- comment -%}
+  Assigns `pub_years`: distinct years in publications.yml, newest first.
+{%- endcomment -%}
+{%- assign pub_years = "" | split: "" -%}
+{%- for entry in site.data.publications -%}
+  {%- assign pub_years = pub_years | push: entry[1].info.year -%}
+{%- endfor -%}
+{%- assign pub_years = pub_years | uniq | sort | reverse -%}

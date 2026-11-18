@@ -8,25 +8,30 @@
     {% include head-custom.html %}
   </head>
   <body>
-    <div class="wrapper">
+    {% assign sidebar = true %}
+    {% if page.layout == "publication" %}{% assign sidebar = false %}{% endif %}
+    <div class="wrapper{% unless sidebar %} no-sidebar{% endunless %}">
+      {% if sidebar %}
       <header>
         {% if site.logo %}
-          <a href="{{ '/' | relative_url }}">
-            <img class="avatar" src="{{ site.logo | relative_url }}" alt="Photo of {{ site.title }}">
-          </a>
+          <img class="avatar" src="{{ site.logo | relative_url }}" alt="Photo of {{ site.title }}">
         {% endif %}
         <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
         <p>{{ site.description }}</p>
 
         <ul class="profile-links">
           {% for l in site.data.profile.links %}
+          {% if l.icon %}
             <li><a href="{{ l.url | relative_url }}">
-              {%- if l.icon %}<i class="{{ l.icon }}" aria-hidden="true"></i>{% endif -%}
-              <span>{{ l.label }}</span>
+              <i class="{{ l.icon }}" aria-hidden="true"></i>
             </a></li>
+          {% endif %}
           {% endfor %}
         </ul>
+
+        <p class="contact-email">rihafili at fit dot cvut dot cz</p>
       </header>
+      {% endif %}
 
       <section>
         <nav aria-label="Main">
@@ -50,3 +55,5 @@
     </div>
   </body>
 </html>
+
+

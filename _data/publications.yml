@@ -5,13 +5,14 @@
 #     title: string
 #     authors: list of strings of authors
 #     info:
-#       venue: string
+#       venue: optional; string
 #       year: int
 #       reference: optional; reference
-#       type: Paper | Extended Abstract | Talk | Poster
+#       type: Paper | Talk | Poster | Extended Abstract | ...
 #     media: all fields optional
 #       file: if true - at media/'slug'.pdf; if string - at media/'the-string'
 #       presentation: if true - at media/'slug'-presentation.pdf; if string - at media/'the-string'
+#       poster: if true - at media/'slug'-poster.pdf; if string - at media/'the-string'
 #       artifact: reference
 #       video: html link
 #     bib: all fields optional
@@ -89,7 +90,7 @@
   info:
     venue: ECOOP'26 Doctoral Symposium
     year: 2026
-    type: Talk
+    type: Research Proposal
   media:
     file: true
     presentation: true
@@ -111,6 +112,26 @@
   abstract: |
     Feedback information is used by Just-in-time compilers as the piece that glues together the runtime and the static worlds by enriching static type information with runtime observations. The compiler can speculate on the observed behavior, which is crucial for unlocking a number of optimizations. The more dynamic features a language has, the more relevant the runtime information becomes when generating performant code. This is the case with R, a highly dynamic programming language that combines delayed evaluation and side effects with first-class environments and full reflective capabilities that can even access and modify the state of stack frames at any time. However, recording feedback information considerably impacts the execution and memory of an interpreter, which leads to the question: Is all the information recorded really needed? In this study, we look at how the feedback information is used in Ř, a just-in-time compiler for the language R. We perform a study on a set of well-known benchmarks and a few real-world programs, reporting on the feedback usage and categorizing how the information is used (or not used) during a compilation.
 
+2025-master-thesis:
+  title: Understanding Feedback Pollution in the R Programming Language
+  authors:
+   - Filip Říha
+  info:
+    year: 2025
+    reference: { link: dspace.cvut.cz/entities/publication/ee3e3810-343c-4971-8590-6412428394db }
+    type: Master Thesis
+  media:
+    file: true
+    poster: true
+  bib:
+    exclude: true
+  abstract: |
+    Modern dynamic languages often leverage Just-in-Time (JIT) compilers to improve performance of frequently executed code. These compilers use the feedback collected at runtime to make speculations about future execution, making further optimization possible. However, over time, the accuracy of this feedback can degrade, leading to less precise speculations and performance degradation. This phenomenon is known as feedback pollution.
+
+    The R programming language is highly specialized for statistical computing and data visualization, and thanks to its features such as reflection and lazy evaluation, it can be difficult to optimize. The Ř JIT compiler tries to improve the performance of R by using speculations on the observed feedback in order to increase the performance of the compiled code.
+
+    The primary objective of this thesis is to develop a tool that allows for detailed observation and analysis of the behavior of the Ř JIT compiler, as otherwise the inner workings of the compiler are a black box. By having the facilities to examine the JIT internals, we open up possibilities for further research and analysis, including the understanding of feedback pollution and feedback usage explored in this thesis.
+
 2024-vmil-feedback-pollution:
   title: "Reducing Feedback Pollution"
   authors:
@@ -127,7 +148,24 @@
   media:
     file: true
     artifact: { link: gitlab.com/rirvm/splitfeedback-experiments }
+    video: youtu.be/C0R3AFlF6tc?si=ZV1sMS7igZzLlH-3
   bib:
     type: inproceedings
   abstract: |
     Just-in-time compilers enhance the performance of future invocations of a function by generating code tailored to past behavior. To achieve this, compilers use a data structure, often referred to as a feedback vector, to record information about each function’s invocations. However, over time, feedback vectors tend to become less precise, leading to lower-quality code – a phenomenon known as feedback vector pollution. This paper examines feedback vector pollution within the context of a compiler for the R language. We provide data, discuss an approach to reduce pollution in practice, and implement a proof-of-concept implementation of this approach. The preliminary results of the implementation indicate ∼30% decrease in polluted compilations and ∼37% decrease in function pollution throughout our corpus.
+
+2023-bachelor-thesis:
+  title: Simple Object Machine Implementation in Functional Programming Language
+  authors:
+   - Filip Říha
+  info:
+    year: 2023
+    reference: { link: dspace.cvut.cz/entities/publication/c01c0b86-9ef9-4e82-b87a-58def55f1ed9 }
+    type: Bachelor Thesis
+  media:
+    file: true
+  bib:
+    exclude: true
+  abstract: |
+    This thesis provides an implementation of a Smalltalk programing language dialect called Simple Object Machine (SOM) in Haskell, a purely functional language. It explores the syntax and semantics of a SOM program and analyses already existing implementations. Then it provides the design and implementation details of the virtual machine, that is based on bytecode instructions and a bytecode interpreter. The parts of the VM are individualy explored, which are lexer, parser, compiler, runtime environment and garbage collector.
+

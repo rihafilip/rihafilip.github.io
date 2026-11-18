@@ -1,0 +1,13 @@
+{%- comment -%}
+  URL of a publications.yml reference ({ doi } or { link }) or of a plain link; links without a scheme get https://.
+  Params: ref, or link
+{%- endcomment -%}
+{%- comment -%} Includes share the caller's scope, hence the prefixed name. {%- endcomment -%}
+{%- assign pub_link = include.link | default: include.ref.link -%}
+{%- if include.ref.doi -%}
+  https://doi.org/{{ include.ref.doi }}
+{%- elsif pub_link contains "://" -%}
+  {{ pub_link }}
+{%- elsif pub_link -%}
+  https://{{ pub_link }}
+{%- endif -%}

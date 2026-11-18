@@ -3,29 +3,42 @@ layout: page
 title: Publications
 permalink: /publications/
 ---
-{% assign by_year = site.data.publications | group_by: "year" | sort: "name" | reverse %}
+{% include pub-years.html %}
 
-{% for year in by_year %}
-<h2 class="pub-year">{{ year.name }}</h2>
+{% for year in pub_years %}
+<h2 class="pub-year">{{ year }}</h2>
 <hr>
 
 <ul class="pub-list">
-{% for p in year.items %}
-  <li class="pub-entry" id="{{ p.slug }}">
+{% for entry in site.data.publications %}
+  {% assign slug = entry[0] %}
+  {% assign p = entry[1] %}
+  {% if p.info.year != year %}{% continue %}{% endif %}
+
+  {% if p.media.file == true %}{% assign file = slug | append: '.pdf' %}{% else %}{% assign file = p.media.file %}{% endif %}
+  {% if p.media.presentation == true %}{% assign presentation = slug | append: '-presentation.pdf' %}{% else %}{% assign presentation = p.media.presentation %}{% endif %}
+  {% if p.media.poster == true %}{% assign poster = slug | append: '-poster.pdf' %}{% else %}{% assign poster = p.media.poster %}{% endif %}
+  {% capture reference_url %}{% include pub-url.html ref=p.info.reference %}{% endcapture %}
+  {% capture artifact_url %}{% include pub-url.html ref=p.media.artifact %}{% endcapture %}
+  {% capture video_url %}{% include pub-url.html link=p.media.video %}{% endcapture %}
+
+  <li class="pub-entry" id="{{ slug }}">
     <details>
       <summary>
-        <h3 class="pub-entry-title">{{ p.title }}</h3>
-        <span class="pub-venue">{{ p.venue }}{% if p.location %}, {{ p.location }}{% endif %}</span>
-        <span class="pub-authors">{{ p.authors | map: "name" | join: ", " }}</span>
+        <h3 class="pub-entry-title">{{ p.title }}{% if p.info.type != "Paper" %} ({{ p.info.type }}){% endif %}</h3>
+        {% if p.info.venue %}<span class="pub-venue">{{ p.info.venue }}</span>{% endif %}
+        <span class="pub-authors">{{ p.authors | join: ", " }}</span>
       </summary>
 
       <div class="pub-details">
-        {% if p.file or p.paper or p.doi or p.artifact or p.slides %}
+        {% if file or presentation or poster or reference_url != "" or artifact_url != "" or video_url != "" %}
         <p class="pub-buttons">
-          {% if p.file %}<a class="btn" href="{{ p.file | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>View PDF</a>{% endif %}
-          {% if p.paper or p.doi %}<a class="btn" href="{% if p.paper %}{{ p.paper }}{% else %}https://doi.org/{{ p.doi }}{% endif %}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>Paper</a>{% endif %}
-          {% if p.artifact %}<a class="btn" href="{{ p.artifact }}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Artifact</a>{% endif %}
-          {% if p.slides %}<a class="btn" href="{{ p.slides | prepend: '/media/' | relative_url }}"><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i>Slides</a>{% endif %}
+          {% if file %}<a class="btn" target="_blank" rel="noopener" href="{{ file | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>View PDF</a>{% endif %}
+          {% if reference_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ reference_url }}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>Paper</a>{% endif %}
+          {% if artifact_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ artifact_url }}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Artifact</a>{% endif %}
+          {% if presentation %}<a class="btn" target="_blank" rel="noopener" href="{{ presentation | prepend: '/media/' | relative_url }}"><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i>Slides</a>{% endif %}
+          {% if poster %}<a class="btn" target="_blank" rel="noopener" href="{{ poster | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-image" aria-hidden="true"></i>Poster</a>{% endif %}
+          {% if video_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ video_url }}"><i class="fa-solid fa-video" aria-hidden="true"></i>Video</a>{% endif %}
         </p>
         {% endif %}
         {{ p.abstract | markdownify }}

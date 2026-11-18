@@ -1,0 +1,87 @@
+---
+layout: page
+title: Publications
+permalink: /publications/
+---
+{% assign pubs   = site.data.publications | sort: "year" | reverse %}
+{% assign venues = pubs | map: "venue" | uniq | sort_natural %}
+{% assign years  = pubs | map: "year" | uniq | sort | reverse %}
+{% assign types  = pubs | map: "type" | uniq | sort_natural %}
+{% assign tags   = pubs | map: "tags" | join: "|" | split: "|" | uniq | sort_natural %}
+
+<div class="pub-filters">
+  <input id="f-search" type="search" placeholder="Search title, author, tag…" aria-label="Search">
+  <select id="f-venue" aria-label="Venue"><option value="">All venues</option>
+    {% for v in venues %}<option>{{ v }}</option>{% endfor %}</select>
+  <select id="f-year" aria-label="Year"><option value="">All years</option>
+    {% for y in years %}<option>{{ y }}</option>{% endfor %}</select>
+  <select id="f-type" aria-label="Type"><option value="">All types</option>
+    {% for t in types %}<option>{{ t }}</option>{% endfor %}</select>
+  <select id="f-tag" aria-label="Tag"><option value="">All tags</option>
+    {% for t in tags %}<option>{{ t }}</option>{% endfor %}</select>
+</div>
+
+<p id="pub-count"></p>
+
+<ul class="pub-grid">
+{% for p in pubs %}
+  {% assign names  = p.authors | map: "name" | join: ", " %}
+  {% assign tagstr = p.tags | join: " " %}
+  {% assign dir    = "/assets/publications/" | append: p.slug | append: "/" %}
+  <li class="pub-card"
+      data-venue="{{ p.venue | escape }}" data-year="{{ p.year }}" data-type="{{ p.type | escape }}"
+      data-tags="{{ p.tags | join: '|' | escape }}"
+      data-search="{{ p.title | append: ' ' | append: names | append: ' ' | append: p.venue | append: ' ' | append: tagstr | downcase | escape }}">
+    <a href="{{ '/publications/' | append: p.slug | append: '/' | relative_url }}">
+      {% if p.pdf %}
+        <img src="{{ dir | append: 'thumb.png' | relative_url }}" alt="" loading="lazy">
+      {% else %}
+        <span class="pub-placeholder" aria-hidden="true">
+          <span class="pub-placeholder-type">{{ p.type }}</span>
+          <span>{{ p.venue }}</span>
+        </span>
+      {% endif %}
+      <span class="pub-title">{{ p.title }}</span>
+    </a>
+    <span class="pub-sub">{{ p.authors.first.name }}{% if p.authors.size > 1 %} et al.{% endif %}</span>
+    <span class="pub-sub">{{ p.venue }}</span>
+  </li>
+{% endfor %}
+</ul>
+
+<script>
+(() => {
+  const ids = ["search", "venue", "year", "type", "tag"];
+  const el = Object.fromEntries(ids.map(k => [k, document.getElementById("f-" + k)]));
+  const cards = [...document.querySelectorAll(".pub-card")];
+  const count = document.getElementById("pub-count");
+
+  // Pre-fill filters from the URL, e.g. /publications/?tag=R&year=2026
+  const params = new URLSearchParams(location.search);
+  ids.forEach(k => { if (params.has(k)) el[k].value = params.get(k); });
+
+  function apply() {
+    const q = el.search.value.trim().toLowerCase();
+    let shown = 0;
+    for (const c of cards) {
+      const ok =
+        (!q || c.dataset.search.includes(q)) &&
+        (!el.venue.value || c.dataset.venue === el.venue.value) &&
+        (!el.year.value  || c.dataset.year  === el.year.value) &&
+        (!el.type.value  || c.dataset.type  === el.type.value) &&
+        (!el.tag.value   || c.dataset.tags.split("|").includes(el.tag.value));
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    count.textContent = shown === 1 ? "1 publication" : `${shown} publications`;
+
+    // Keep the URL in sync so filtered views can be shared
+    const p = new URLSearchParams();
+    ids.forEach(k => { if (el[k].value) p.set(k, el[k].value); });
+    history.replaceState(null, "", p.toString() ? "?" + p : location.pathname);
+  }
+
+  ids.forEach(k => el[k].addEventListener("input", apply));
+  apply();
+})();
+</script>

@@ -1,0 +1,137 @@
+---
+---
+@import "jekyll-theme-minimal";
+
+// Your own palette (Minimal hard-codes its colors, so we define ours here)
+$text:   #3b3b3b;
+$head:   #1f2328;
+$muted:  #6b7280;
+$border: #e5e5e5;
+$link:   #0b5cad;
+$soft:   #f4f6fa;
+
+// Sidebar: profile and navigation
+
+header .avatar {
+  width: 150px; aspect-ratio: 1; object-fit: cover;
+  border-radius: 50%; margin-bottom: 1rem;
+}
+header h1 a { color: $head; text-decoration: none; }
+
+// Minimal styles every sidebar <ul> as its gray "download buttons" box
+header .site-nav,
+header .profile-links {
+  height: auto; width: auto; background: none; border: 0; border-radius: 0;
+  padding: 0; margin: 0 0 1.25rem;
+}
+header .site-nav li,
+header .profile-links li {
+  float: none; width: auto; height: auto; border: 0; list-style: none;
+}
+header .site-nav a,
+header .profile-links a {
+  display: inline-block; text-align: left; padding: .15rem 0;
+  font-size: 1em; color: $link;
+}
+header .site-nav a { font-weight: 600; color: $head; }
+header .site-nav a[aria-current="page"] { color: $link; }
+header .profile-links a { font-size: .9em; }
+
+// Fonts
+
+body {
+  font-family: "Source Sans 3", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $text;                    // Minimal's default gray is quite light
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  color: $head;
+}
+a       { color: $link; }
+a:hover { color: darken($link, 12%); }
+
+// Wider content column on large screens only, keeping Minimal's mobile layout
+
+@media screen and (min-width: 1100px) {
+  .wrapper { width: 980px; }
+  section  { width: 660px; }
+}
+
+// Minimal pins the footer under the sidebar; with nav and links in the
+// sidebar they can overlap, so move it under the content instead.
+@media screen and (min-width: 961px) {
+  footer { position: static; float: right; width: 500px; clear: right; }
+}
+@media screen and (min-width: 1100px) {
+  footer { width: 660px; }
+}
+
+// CV
+
+.cv-meta { color: $muted; }
+
+// Publication gallery
+
+.pub-filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.pub-filters input  { flex: 1 1 12rem; padding: .4rem; }
+.pub-filters select { padding: .4rem; max-width: 100%; }
+
+.pub-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+.pub-card a { display: block; text-decoration: none; }
+.pub-card img,
+.pub-placeholder {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top;
+  border: 1px solid $border; border-radius: 4px;
+}
+.pub-placeholder {
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  box-sizing: border-box; padding: .75rem; text-align: center;
+  background: $soft; color: $muted; font-size: .9em;
+}
+.pub-placeholder-type { font-weight: 600; color: $head; }
+.pub-title { display: block; font-weight: 600; margin-top: .4rem; line-height: 1.3; }
+.pub-sub   { display: block; font-size: .85em; color: $muted; }
+
+.pub-thumb-large {
+  max-width: 220px; width: 100%; float: right; margin: 0 0 1rem 1rem;
+  border: 1px solid $border;
+}
+.pub-links a { margin-right: .75rem; }
+.pub-tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.pub-tags a { background: $soft; padding: .1rem .5rem; border-radius: 999px; font-size: .85em; }
+.orcid { font-size: .7em; background: #a6ce39; color: #fff; padding: 0 .25rem; border-radius: 3px; }
+#bibtex { white-space: pre-wrap; clear: both; }
+
+@media screen and (max-width: 600px) {
+  .pub-thumb-large { float: none; margin: 0 0 1rem 0; }
+}
+
+// Dark mode, following the visitor's system setting
+
+@media (prefers-color-scheme: dark) {
+  body                 { background: #111418; color: #c9ccd1; }
+  h1, h2, h3, h4, h5, h6,
+  strong, header h1 a,
+  header .site-nav a   { color: #f0f0f0; }
+  a, header .profile-links a,
+  header .site-nav a[aria-current="page"] { color: #6cb0ff; }
+  a:hover              { color: #9ccaff; }
+  code, pre            { background: #1a1d23; border-color: #2a2d34; color: #e6e6e6; }
+  blockquote           { border-left-color: #2a2d34; color: #9aa0a6; }
+  th, td               { border-bottom-color: #2a2d34; }
+  hr                   { background: #2a2d34; }
+  .pub-sub, small,
+  .cv-meta             { color: #9aa0a6; }
+  .pub-card img,
+  .pub-thumb-large     { border-color: #2a2d34; }
+  .pub-placeholder     { background: #1a1d23; border-color: #2a2d34; color: #9aa0a6; }
+  .pub-placeholder-type { color: #f0f0f0; }
+  .pub-tags a          { background: #1f2a3d; }
+}

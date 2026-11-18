@@ -1,0 +1,29 @@
+title: Filip Říha
+description: >-
+  PhD student at the Programming Research Laboratory, FIT CTU in Prague.
+  Just-in-time compilers, type feedback, R, benchmarking.
+email: riha.fina@gmail.com
+url: "https://rihafilip.github.io"
+baseurl: ""                  # empty for a yourusername.github.io repo
+lang: en
+logo: /assets/img/me.jpg     # Minimal's sidebar image; used as your photo
+
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-seo-tag
+
+# Sidebar navigation, in this order
+header_pages:
+  - index.md
+  - cv.md
+  - publications.html
+
+exclude:
+  - README.md
+  - HOWTO.md
+  - profile.jpg
+  - flake.nix
+  - flake.lock
+  - .envrc
+  - scripts
+  - vendor

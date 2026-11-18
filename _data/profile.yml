@@ -1,0 +1,5 @@
+links:
+  - { label: CV (PDF),       url: /files/cv.pdf }
+  - { label: PRL-PRG,        url: "https://prl-prg.github.io/" }
+  - { label: GitHub,         url: "https://github.com/rihafilip" }
+  - { label: Email,          url: "mailto:riha.fina@gmail.com" }

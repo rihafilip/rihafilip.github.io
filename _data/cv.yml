@@ -1,0 +1,30 @@
+education:
+  - degree: PhD in Informatics
+    institution: FIT CTU in Prague
+    years: 2025 – present
+  - degree: Master's Degree in System Programming
+    institution: FIT CTU in Prague
+    years: 2023 – 2025
+  - degree: Bachelor's Degree in Theoretical Informatics
+    institution: FIT CTU in Prague
+    years: 2019 – 2023
+
+research:
+  - group: Programming Research Laboratory, FIT CTU in Prague
+    url: https://prl-prg.github.io/
+    years: 2023 – present
+    items:
+      - Development of a compiler, based on the Skip language developed at Facebook and used for a static analysis course.
+      - Implementation of a recording tool for gathering data about behavior of Ř, a Just-in-time compiler for R.
+      - Research of type feedback behavior in Just-in-time compilers.
+
+teaching:
+  - role: BI-OOP – Object-Oriented Programming
+    institution: FIT CTU in Prague
+    years: 2023 – present
+    note: Advanced concepts of OOP at the end of undergraduate CS program.
+
+service:
+  - role: Student Volunteer Co-Chair
+    event: SPLASH-ISSTA'26
+    year: 2026

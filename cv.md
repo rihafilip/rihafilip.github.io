@@ -1,8 +1,10 @@
 ---
-layout: page
+layout: default
 title: CV
 permalink: /cv/
 ---
+
+# CV
 
 [Download PDF]({{ '/files/cv.pdf' | relative_url }})
 

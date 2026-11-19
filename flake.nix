@@ -28,6 +28,7 @@
 
               curl
 
+              just
               pandoc
               texliveFull
             ];

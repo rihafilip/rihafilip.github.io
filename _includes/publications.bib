@@ -1,0 +1,37 @@
+{%- comment -%}
+  BibTeX entries for site.data.publications, skipping those with bib.exclude.
+  Literal braces are emitted via variables, since doubled braces would start a Liquid tag.
+  Fields from bib.other take precedence over the derived ones.
+{%- endcomment -%}
+{%- assign o = "{" -%}
+{%- assign c = "}" -%}
+{%- for entry in site.data.publications -%}
+{%- assign slug = entry[0] -%}
+{%- assign p = entry[1] -%}
+{%- assign other = p.bib.other -%}
+{%- unless p.bib.exclude %}
+@{{ p.bib.type | default: "misc" }}{{ o }}{{ slug }},
+{%- unless other.title %}
+  title = {{ o }}{{ o }}{{ p.title }}{{ c }}{{ c }},
+{%- endunless -%}
+{%- unless other.author %}
+  author = {{ o }}{{ p.authors | join: " and " }}{{ c }},
+{%- endunless -%}
+{%- if p.info.venue -%}{%- unless other.booktitle %}
+  booktitle = {{ o }}{{ p.info.venue }}{{ c }},
+{%- endunless -%}{%- endif -%}
+{%- unless other.year %}
+  year = {{ o }}{{ p.info.year }}{{ c }},
+{%- endunless -%}
+{%- if p.info.reference.doi -%}{%- unless other.doi %}
+  doi = {{ o }}{{ p.info.reference.doi }}{{ c }},
+{%- endunless -%}{%- endif -%}
+{%- if p.info.reference.link -%}{%- unless other.url %}
+  url = {{ o }}https://{{ p.info.reference.link }}{{ c }},
+{%- endunless -%}{%- endif -%}
+{%- for field in other %}
+  {{ field[0] }} = {{ o }}{{ field[1] }}{{ c }},
+{%- endfor %}
+{{ c }}
+{% endunless -%}
+{%- endfor -%}

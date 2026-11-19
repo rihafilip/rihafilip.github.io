@@ -5,6 +5,16 @@ permalink: /publications/
 ---
 
 <h1>Publications and Talks</h1>
+
+{% capture bib %}{% include publications.bib %}{% endcapture %}
+<details class="bib-toggle">
+  <summary>BibTeX</summary>
+  <div class="bib-code">
+    <button type="button" class="bib-copy">Copy</button>
+    <pre><code>{{ bib | strip | escape }}</code></pre>
+  </div>
+</details>
+
 {% include pub-years.html %}
 
 {% for year in pub_years %}
@@ -69,6 +79,13 @@ permalink: /publications/
 
 <script>
   // Links like /publications/#<slug> open that entry
-  const linked = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  const linked = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
   linked?.querySelector("details")?.setAttribute("open", "");
+
+  document.querySelector(".bib-copy").addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    await navigator.clipboard.writeText(button.nextElementSibling.textContent);
+    button.textContent = "Copied";
+    setTimeout(() => { button.textContent = "Copy"; }, 1500);
+  });
 </script>

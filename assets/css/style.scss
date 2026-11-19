@@ -84,6 +84,21 @@ a:hover { color: darken($link, 12%); }
 .btn:hover { background: $link; color: #fff; }
 .btn:hover { background: darken($link, 12%); }
 
+.bib-toggle { margin: 0 0 1.5rem; }
+.bib-toggle summary { list-style: none; cursor: pointer; color: $link; }
+.bib-toggle summary:hover { color: darken($link, 12%); text-decoration: underline; }
+.bib-toggle summary::-webkit-details-marker { display: none; }
+.bib-toggle summary::before { content: "\25B8"; margin-right: .35em; }
+.bib-toggle[open] summary::before { content: "\25BE"; }
+.bib-code { position: relative; margin-top: .75rem; }
+.bib-toggle pre { margin: 0; font-size: .8em; }
+.bib-copy {
+  position: absolute; top: .5rem; right: .5rem;
+  padding: .1rem .6rem; border: 1px solid $link; border-radius: 4px;
+  background: #fff; color: $link; font: inherit; font-size: .8rem; cursor: pointer;
+}
+.bib-copy:hover { background: $link; color: #fff; }
+
 .pill {
   display: inline-block; vertical-align: middle;
   padding: .1rem .6rem; border: 1.5px solid $link; border-radius: 4px;
@@ -111,4 +126,8 @@ a:hover { color: darken($link, 12%); }
   .btn, .btn:hover     { background: #6cb0ff; color: #111418; }
   .btn:hover           { background: #9ccaff; }
   .pill                { border-color: #6cb0ff; color: #6cb0ff; }
+  .bib-toggle summary  { color: #6cb0ff; }
+  .bib-toggle summary:hover { color: #9ccaff; }
+  .bib-copy            { background: #1a1d23; border-color: #6cb0ff; color: #6cb0ff; }
+  .bib-copy:hover      { background: #6cb0ff; color: #111418; }
 }

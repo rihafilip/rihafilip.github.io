@@ -11,7 +11,8 @@ education:
     years: 2019 – 2023
 
 research:
-  - group: Programming Research Laboratory, FIT CTU in Prague
+  - position: PhD student
+    group: Programming Research Laboratory, FIT CTU in Prague
     url: https://prl-prg.github.io/
     years: 2023 – present
     items:
@@ -21,7 +22,7 @@ research:
 
 work_experience:
   - position: Junior Java Developer
-    years: 2022--2023
+    years: 2022 - 2023
     where: Profinit/ČSOB Pojišťovna, a.s.
     url: https://profinit.eu/
     items:

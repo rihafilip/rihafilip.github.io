@@ -1,0 +1,243 @@
+%! TeX program = lualatex
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[english]{babel} % multilingual support
+
+% set the page layout
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=20mm,
+    top=15mm}
+
+% No headers and footers
+\pagestyle{empty}
+
+% Edit sections
+\usepackage{sectsty}
+
+% Font
+\sectionfont{
+    \large % make sections smaller
+    \fontfamily{qag}\selectfont % change font family
+    \sectionrule{0pt}{0pt}{-5pt}{1pt}} % insert a thin rule
+
+% Itemize
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=0pt}
+
+%-----------------------------------------------------
+% Extra packages
+%-----------------------------------------------------
+\usepackage{hyperref}
+
+%-----------------------------------------------------
+% Macros
+%-----------------------------------------------------
+
+\newcommand{\ifnotempty}[2]{%
+  \if\relax\detokenize{#1}\relax
+    % empty
+  \else
+    #2
+  \fi
+}
+
+% personal information
+\newcommand{\info}[2]{
+    \noindent\hangindent=0.05\textwidth
+    \parbox{0.1\textwidth}{\textit{#1}}
+    #2 \par}
+
+% education or work entry
+% Name, time, place, url, description
+\newcommand{\experience}[5]{
+    \noindent \textbf{#1}
+    \hfill
+    \framebox{\parbox{7em}{\centering\textbf{#2}}}
+    \par
+
+    \ifnotempty{#3}{\noindent \textit{#3} \par}
+    \ifnotempty{#4}{\noindent \textit{\url{#4}} \par}
+
+    \noindent\hangindent=2em\hangafter=0
+    #5
+    \normalsize \par}
+
+% Sub category in experience
+% name, contents
+\newcommand{\category}[2]{
+    \parbox{0.2\textwidth}{\textit{#1}}
+    #2 \par}
+
+% skill category, skills
+\newcommand{\skill}[2]{
+    \noindent\hangafter=0
+    {\textbf{#1} \par #2}
+    \par}
+
+% language, level
+\newcommand{\lan}[2]{
+    \noindent\hangindent=2em\hangafter=0
+    \parbox{0.12\textwidth}{\textbf{#1}}
+     #2 \par}
+
+%-----------------------------------------------------
+% Document
+%-----------------------------------------------------
+\begin{document}
+%-----------------------------------------------------
+% Name
+%-----------------------------------------------------
+\Huge\fontfamily{phv}\selectfont
+
+\begin{center}
+	\textbf{Filip Říha}
+\end{center}
+\par
+
+\normalsize\normalfont
+
+\bigskip
+
+%-----------------------------------------------------
+% Info
+%-----------------------------------------------------
+\info{Email}{\texttt{riha.fina@gmail.com}}
+
+\info{riha.fina@gmail.com}{\texttt{Email}}
+\info{https://rihafilip.github.io:}{\texttt{Webpage}}
+\info{https://github.com/rihafilip}{\texttt{GitHub}}
+\info{https://scholar.google.com/citations?user=w9TEpsIAAAAJ}{\texttt{Google
+Scholar}}
+\info{https://orcid.org/0009-0009-3933-2997}{\texttt{ORCID}}
+
+%-----------------------------------------------------
+\section*{Education}
+%-----------------------------------------------------
+\experience{Doctoral Study}{2026--present}{FIT CTU in Prague}{}{}
+
+\medskip
+
+\experience{Master's Degree in System Programming}{2023--2025}{FIT CTU in Prague}{}{}
+
+\medskip
+
+\experience{Bachelor's Degree in Theoretical Informatics}{2019--2023}{FIT CTU in Prague}{}{}
+
+%-----------------------------------------------------
+\section*{Work Experience}
+%-----------------------------------------------------
+
+\experience{Programming Languages Researcher}
+{2023--present}
+{Programming Languages Laboratory, FIT CTU in Prague}
+{https://prl-prg.github.io/}
+{
+	\begin{itemize}
+    \item Development of a compiler, based on the Skip language developed at Facebook and used for a static analysis course.
+    \item Implementation of a recording tool for gathering data about behavior of Ř, a Just-in-time compiler for R.
+    \item Research of type feedback behavior in Just-in-time compilers.
+	\end{itemize}
+	\category{Technologies}{C++, Skip language, LLVM}
+}
+
+\medskip
+
+\experience{Junior Java Developer}
+{2022--2023}
+{Profinit/ČSOB Pojišťovna, a.s.}
+{https://profinit.eu/}
+{
+	\begin{itemize}
+		\item Development of a system for non-life insurance integrated with the bank's other systems.
+		\item Development of internal tools for testing, deploying, and mocking.
+	\end{itemize}
+	\category{Technologies}{Java, Spring, JSP, Sybase ASE, JavaScript}
+}
+
+\medskip
+
+\experience{Internship}
+{2021}
+{ART\&MIS, s.r.o.}
+{https://artemis-crm.cz/}
+{
+	\begin{itemize}
+		\item Complete solutions in Microsoft Dynamics 365.
+		\item Development of CRM solution tailored form customer, including web and mobile applications, migration from different systems, and database administration.
+	\end{itemize}
+	\category{Technologies}{Microsoft Dynamics 365, MS SQL Server, C\#, JavaScript}
+}
+%-----------------------------------------------------
+\section*{Publications}
+%-----------------------------------------------------
+
+\experience{Reducing Feedback Pollution}
+{2024}
+{Krynski, S., Štěpánek, M., Říha, F., Křikava, F., Vitek, J.}
+{https://dl.acm.org/doi/10.1145/3689490.3690404}
+{
+	In International Workshop on Virtual Machines and Intermediate Languages (VMIL)
+}
+
+%-----------------------------------------------------
+\section*{Teaching Experience}
+%-----------------------------------------------------
+
+\experience{BI-OOP - Object-Oriented Programming}
+{2023--present}
+{FIT CTU in Prague}
+{}
+{
+	Advanced concepts of OOP at the end of undergraduate CS program.
+}
+
+%-----------------------------------------------------
+\section*{Projects}
+%-----------------------------------------------------
+\experience{HaSOM}
+{2023}
+{}
+{https://github.com/rihafilip/HaSOM}{
+	\begin{itemize}
+		\item Simple Object Machine language implementation in Haskell.
+		\item Pure OOP language implemented in pure functional programming language.
+		\item Includes a lexer, parser, compiler, bytecode interpreter, and garbage collector.
+	\end{itemize}
+}
+
+\medskip
+
+\experience{TinyLisp}
+{2020}
+{}
+{https://github.com/rihafilip/tiny-lisp}
+{
+	\begin{itemize}
+		\item Lisp-like programming language interpreting a subset of Lisp expressions.
+		\item C++ implementation written in fully functional style.
+		\item SECD virtual machine with garbage collector and REPL.
+	\end{itemize}
+}
+
+%-----------------------------------------------------
+\section*{Skills}
+%-----------------------------------------------------
+
+\skill{Programming Languages}{C/C++, Java, Scala, Haskell, Python, JavaScript, SQL, AWK, Bash, LaTeX}\smallskip
+\skill{Frameworks}{Spring, Spring Boot, Hibernate, ReactJS}\smallskip
+\skill{Databases}{PostgreSQL, SQLite, H2, MS SQL Server, Sybase ASE, Sybase Replication Server}\smallskip
+\skill{VCS}{Git, SVN}\smallskip
+\skill{CI/CD}{Docker, GitLab CI/CD, Jenkins}\smallskip
+\skill{Project Management}{Bugzilla, Jira, Youtrack, Enterprise Architect, SQL Developer}\smallskip
+
+%-----------------------------------------------------
+\section*{Languages}
+%-----------------------------------------------------
+
+\lan{Czech}{Native}
+\lan{English}{C1 (CAE certificate)}
+
+\end{document}

@@ -27,6 +27,9 @@
               openssl
 
               curl
+
+              pandoc
+              texliveFull
             ];
 
             shellHook = ''

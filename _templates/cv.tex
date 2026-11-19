@@ -1,0 +1,207 @@
+%! TeX program = lualatex
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[english]{babel} % multilingual support
+
+% set the page layout
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=20mm,
+    top=15mm}
+
+% No headers and footers
+\pagestyle{empty}
+
+% Edit sections
+\usepackage{sectsty}
+
+% Font
+\sectionfont{
+    \large % make sections smaller
+    \fontfamily{qag}\selectfont % change font family
+    \sectionrule{0pt}{0pt}{-5pt}{1pt}} % insert a thin rule
+
+% Itemize
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=0pt}
+
+%-----------------------------------------------------
+% Extra packages
+%-----------------------------------------------------
+\usepackage{xcolor}
+\definecolor{linkblue}{HTML}{0B5CAD}
+\usepackage[colorlinks=true, urlcolor=linkblue, linkcolor=linkblue, citecolor=linkblue]{hyperref}
+
+%-----------------------------------------------------
+% Macros
+%-----------------------------------------------------
+
+\newcommand{\ifnotempty}[2]{%
+  \if\relax\detokenize{#1}\relax
+    % empty
+  \else
+    #2
+  \fi
+}
+
+% personal information
+\newcommand{\info}[2]{
+    \noindent\hangindent=0.05\textwidth
+    \parbox{0.2\textwidth}{\textit{#1}}
+    #2 \par}
+
+% education or work entry
+% Name, time, place, url, description
+\newcommand{\experience}[5]{
+    \noindent \textbf{#1}
+    \hfill
+    \framebox{\parbox{8em}{\centering\textbf{#2}}}
+    \par
+
+    \ifnotempty{#3}{\noindent \textit{#3} \par}
+    \ifnotempty{#4}{\noindent \url{#4} \par}
+
+    \noindent\hangindent=2em\hangafter=0
+    #5
+    \normalsize \par}
+
+% Sub category in experience
+% name, contents
+\newcommand{\category}[2]{
+    \parbox{0.2\textwidth}{\textit{#1}}
+    #2 \par}
+
+% skill category, skills
+\newcommand{\skill}[2]{
+    \noindent\hangafter=0
+    {\textbf{#1} \par #2}
+    \par}
+
+% language, level
+\newcommand{\lan}[2]{
+    \noindent\hangindent=2em\hangafter=0
+    \parbox{0.12\textwidth}{\textbf{#1}}
+     #2 \par}
+
+%-----------------------------------------------------
+% Document
+%-----------------------------------------------------
+\begin{document}
+%-----------------------------------------------------
+% Name
+%-----------------------------------------------------
+\Huge\fontfamily{phv}\selectfont
+
+\begin{center}
+	\textbf{Filip Říha}
+\end{center}
+\par
+
+\normalsize\normalfont
+
+\bigskip
+
+%-----------------------------------------------------
+% Info
+%-----------------------------------------------------
+$for(links)$
+\info{$links.label$}{\url{$links.url$}}
+$endfor$
+
+%-----------------------------------------------------
+\section*{Education}
+%-----------------------------------------------------
+$for(education)$
+\experience{$education.degree$}{$education.years$}{$education.institution$}{}{}
+$sep$\medskip
+$endfor$
+
+%-----------------------------------------------------
+\section*{Work Experience}
+%-----------------------------------------------------
+
+$for(research)$
+\experience{$it.position$}{$it.years$}{$it.group$}{$it.url$}{
+\begin{itemize}
+  $for(it.items)$
+    \item $it$
+  $endfor$
+\end{itemize}
+}
+$sep$\medskip
+$endfor$
+
+$for(work_experience)$
+\experience{$it.position$}{$it.years$}{$it.group$}{$it.url$}{
+\begin{itemize}
+  $for(it.items)$
+    \item $it$
+  $endfor$
+\end{itemize}
+}
+$sep$\medskip
+$endfor$
+
+%-----------------------------------------------------
+\section*{Publications}
+%-----------------------------------------------------
+
+$for(publications)$
+\textit{$it.authors[, ]$} ($it.info.year$). \textbf{$it.title$}. In $it.info.venue$.\\
+\url{$if(it.info.reference.doi)$
+https://doi.org/$it.info.reference.doi$
+$elseif(it.info.reference.link)$
+https://$it.info.reference.link$
+$endif$}
+
+$sep$
+\medskip
+$endfor$
+
+%-----------------------------------------------------
+\section*{Teaching Experience}
+%-----------------------------------------------------
+
+$for(teaching)$
+\experience{$it.subject$}{$it.years$}{$it.institution$}{}{$it.note$}
+$sep$\medskip
+$endfor$
+
+%-----------------------------------------------------
+\section*{Projects}
+%-----------------------------------------------------
+\experience{HaSOM}
+{2023}
+{}
+{https://github.com/rihafilip/HaSOM}{
+	\begin{itemize}
+		\item Simple Object Machine language implementation in Haskell.
+		\item Pure OOP language implemented in pure functional programming language.
+		\item Includes a lexer, parser, compiler, bytecode interpreter, and garbage collector.
+	\end{itemize}
+}
+
+\medskip
+
+\experience{TinyLisp}
+{2020}
+{}
+{https://github.com/rihafilip/tiny-lisp}
+{
+	\begin{itemize}
+		\item Lisp-like programming language interpreting a subset of Lisp expressions.
+		\item C++ implementation written in fully functional style.
+		\item SECD virtual machine with garbage collector and REPL.
+	\end{itemize}
+}
+
+%-----------------------------------------------------
+\section*{Languages}
+%-----------------------------------------------------
+
+\lan{Czech}{Native}
+\lan{English}{C1 (CAE certificate)}
+
+\end{document}

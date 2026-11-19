@@ -6,4 +6,4 @@ vendor/
 .bundle/
 .direnv/
 result
-/files/cv.pdf
+files/cv.pdf

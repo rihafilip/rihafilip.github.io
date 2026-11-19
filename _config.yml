@@ -1,6 +1,7 @@
 title: Filip Říha
 description: >-
   PhD student at the Programming Research Laboratory, FIT CTU in Prague.
+  Just-in-time compilers, type feedback, R, benchmarking.
 
 url: "https://rihafilip.github.io"
 baseurl: ""
@@ -13,9 +14,9 @@ plugins:
   - jekyll-seo-tag
 
 header_pages:
-  - index.md
-  - cv.md
-  - publications.html
+  - pages/index.md
+  - pages/cv.md
+  - pages/publications.html
 
 exclude:
   - flake.nix

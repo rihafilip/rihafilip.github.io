@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About
+permalink: /
 ---
 
 I'm a PhD student at the [Programming Research Laboratory](https://prl-prg.github.io/)

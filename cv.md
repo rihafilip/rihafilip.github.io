@@ -43,5 +43,5 @@ permalink: /cv/
 
 ## Other Activities
 {% for s in site.data.cv.other %}
-- {{ s.role }}, {{ s.event }}
+{{ s.role }}, {{ s.event }}
 {% endfor %}

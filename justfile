@@ -1,4 +1,4 @@
-cv_sources := "--metadata-file=_config.yml --metadata-file=_data/profile.yml --metadata-file=_data/cv.yml --lua-filter=_templates/publications.lua"
+cv_sources := "--metadata-file=_data/profile.yml --metadata-file=_data/cv.yml --lua-filter=_templates/publications.lua"
 
 # Render the CV to files/cv.pdf
 cv:

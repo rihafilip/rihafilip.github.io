@@ -20,7 +20,6 @@
 % Font
 \sectionfont{
     \large % make sections smaller
-    \fontfamily{qag}\selectfont % change font family
     \sectionrule{0pt}{0pt}{-5pt}{1pt}} % insert a thin rule
 
 % Itemize
@@ -56,8 +55,10 @@
 % Name, time, place, url, description
 \newcommand{\experience}[5]{
     \noindent \textbf{#1}
+    \ifnotempty{#2}{%
     \hfill
-    \framebox{\parbox{8em}{\centering\textbf{#2}}}
+    \framebox{\parbox{8em}{\centering\textbf{#2}}}%
+    }
     \par
 
     \ifnotempty{#3}{\noindent \textit{#3} \par}
@@ -92,14 +93,13 @@
 %-----------------------------------------------------
 % Name
 %-----------------------------------------------------
-\Huge\fontfamily{phv}\selectfont
-
+{
+\Huge%
 \begin{center}
 	\textbf{Filip Říha}
 \end{center}
-\par
-
-\normalsize\normalfont
+\par%
+}
 
 \bigskip
 
@@ -114,7 +114,7 @@ $endfor$
 \section*{Education}
 %-----------------------------------------------------
 $for(education)$
-\experience{$education.degree$}{$education.years$}{$education.institution$}{}{}
+\experience{$it.degree$}{$it.years$}{$it.institution$}{}{$it.note$}
 $sep$\medskip
 $endfor$
 
@@ -149,12 +149,12 @@ $endfor$
 %-----------------------------------------------------
 
 $for(publications)$
-\textit{$it.authors[, ]$} ($it.info.year$). \textbf{$it.title$}. In $it.info.venue$.\\
-\url{$if(it.info.reference.doi)$
-https://doi.org/$it.info.reference.doi$
+\noindent \textit{$it.authors[, ]$} ($it.info.year$). \textbf{$it.title$}. In $it.info.venue$.\\
+$if(it.info.reference.doi)$
+DOI: \href{https://doi.org/$it.info.reference.doi$}{$it.info.reference.doi$}
 $elseif(it.info.reference.link)$
-https://$it.info.reference.link$
-$endif$}
+\url{https://$it.info.reference.link$}
+$endif$
 
 $sep$
 \medskip
@@ -165,15 +165,25 @@ $endfor$
 %-----------------------------------------------------
 
 $for(teaching)$
-\experience{$it.subject$}{$it.years$}{$it.institution$}{}{$it.note$}
+\experience{$it.subject$}{}{$it.institution$}{}{$it.note$}
 $sep$\medskip
 $endfor$
 
 %-----------------------------------------------------
 \section*{Projects}
 %-----------------------------------------------------
+\experience{bench}
+{}
+{}
+{https://github.com/PRL-PRG/bench}{
+	\begin{itemize}
+		\item A complete tool for benchmarking experiments.
+		\item Both a command-line tool for quick benchmarks, and a Python framework for defining rigid and reproducible experiments.
+	\end{itemize}
+}
+
 \experience{HaSOM}
-{2023}
+{}
 {}
 {https://github.com/rihafilip/HaSOM}{
 	\begin{itemize}
@@ -183,19 +193,6 @@ $endfor$
 	\end{itemize}
 }
 
-\medskip
-
-\experience{TinyLisp}
-{2020}
-{}
-{https://github.com/rihafilip/tiny-lisp}
-{
-	\begin{itemize}
-		\item Lisp-like programming language interpreting a subset of Lisp expressions.
-		\item C++ implementation written in fully functional style.
-		\item SECD virtual machine with garbage collector and REPL.
-	\end{itemize}
-}
 
 %-----------------------------------------------------
 \section*{Languages}

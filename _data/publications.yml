@@ -41,6 +41,8 @@
     artifact: { link: github.com/PRL-PRG/r-benchmarks }
   bib:
     type: inproceedings
+    other:
+      booktitle: VMIL
   abstract: |
     Many programming language implementations have a benchmark suite that consists of a fixed set of programs with a harness and clear maintenance. R has none. Instead, R implementations are evaluated on ad hoc sets of programs and harnesses with different timing conventions. This paper is a step toward a benchmarking suite for R. We collect 118 R programs from 8 repositories and put them under a single harness. Next, we characterize their performance profiles, which show the share of the run spent in different regions of the R virtual machine (e.g., bytecode interpreter, memory management, builtin functions). This allows us to classify benchmarks by what they exercise so we can create suites that target a specific use such as compiler optimizations. On three R compilers, the speedups follow the profiles. They concentrate in the interpreter-bound programs and vanish in the ones dominated by native code. The profiles also cut the cost of running a suite. Dropping the 53 programs dominated by native code or builtins leaves 65 programs and saves 51.7% of the running time of the corpus.
 
@@ -60,7 +62,7 @@
   bib:
     type: inproceedings
     other:
-      series: "{SPLASH Companion '26}"
+      booktitle: "{SPLASH Companion '26}"
   abstract: |
     Benchmarking provides much of the feedback that drives systems and language research, yet sound benchmarking is hard. As experiments grow, added programs, configurations, custom metrics, warmup, failures, and machine noise can all mislead. We present bench, a tool that keeps simple measurements simple and lets complex experiments scale without leaving a general-purpose language. It offers a command-line interface for ad-hoc runs and a small, almost declarative Python API for repeatable experiments, both backed by one engine. A builder API resolves a suite of benchmarks lazily against a typed context, so a single script can be parametrized from the command line, discover its workloads at run time, and treat process benchmarks and in-process harnesses through one pipeline. We have successfully used it to simplify the benchmarking infrastructure for our R just-in-time compiler, used it in classes benchmarking student virtual machines, and driving established suites such as Renaissance or SPEC.
 
@@ -81,6 +83,8 @@
     artifact: { doi: 10.4230/DARTS.12.1.4 }
   bib:
     type: inproceedings
+    other:
+      booktitle: ECOOP
   abstract: |
     Just-in-time (JIT) compilers leverage type feedback to optimize dynamic languages by recording runtime observations during interpretation and using them to generate specialized code. However, this recording process introduces significant execution time overhead to program warmup. This paper presents a characterization study of how feedback information is utilized by JIT compilers, providing motivation for future work on reducing recording overhead. We instrument the Ř compiler for the R language to track feedback slot usage throughout compilation, analyzing well-known benchmarks and real-world programs. Our measurements reveal that recording adds overhead to the interpreter up to 1.6× (mean 1.2×), yet at least 59% of non-empty slots are not used by the compiler. A large fraction of these unused slots can be attributed to dead code that the compiler eliminated. Most of the remaining slots are type-stable - meaning the inferred type matches the observed type - making speculation futile. To quantify the potential for improvement, we evaluate two oracle-based configurations that establish upper bounds on achievable reduction: a conservative set approach that preserves optimization quality while improving warmup, and an optimistic set approach that sacrifices some compiled code performance for faster interpretation.
 
@@ -167,6 +171,7 @@
     video: youtu.be/C0R3AFlF6tc?si=ZV1sMS7igZzLlH-3
   bib:
     type: inproceedings
+    booktitle: VMIL
   abstract: |
     Just-in-time compilers enhance the performance of future invocations of a function by generating code tailored to past behavior. To achieve this, compilers use a data structure, often referred to as a feedback vector, to record information about each function’s invocations. However, over time, feedback vectors tend to become less precise, leading to lower-quality code – a phenomenon known as feedback vector pollution. This paper examines feedback vector pollution within the context of a compiler for the R language. We provide data, discuss an approach to reduce pollution in practice, and implement a proof-of-concept implementation of this approach. The preliminary results of the implementation indicate ∼30% decrease in polluted compilations and ∼37% decrease in function pollution throughout our corpus.
 

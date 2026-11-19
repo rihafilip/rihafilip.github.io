@@ -2,6 +2,7 @@ education:
   - degree: PhD in Informatics
     institution: FIT CTU in Prague
     years: 2025 – present
+    note: "*Supervisor:* Filip Křikava, *Co-supervisor:* Tomáš Petříček"
   - degree: Master's Degree in System Programming
     institution: FIT CTU in Prague
     years: 2023 – 2025
@@ -14,15 +15,46 @@ research:
     url: https://prl-prg.github.io/
     years: 2023 – present
     items:
-      - Development of a compiler, based on the Skip language developed at Facebook and used for a static analysis course.
-      - Implementation of a recording tool for gathering data about behavior of Ř, a Just-in-time compiler for R.
       - Research of type feedback behavior in Just-in-time compilers.
+      - Research and tool development in virtual machine benchmarking.
+      - Focus on language virtual machines and the R language.
+
+work_experience:
+  - position: Junior Java Developer
+    years: 2022--2023
+    where: Profinit/ČSOB Pojišťovna, a.s.
+    url: https://profinit.eu/
+    items:
+      - Development of a system for non-life insurance integrated with the bank's other systems.
+      - Development of internal tools for testing, deploying, and mocking.
+
+  - position: Internship
+    years: 2021
+    where: ART\&MIS, s.r.o.
+    url: https://artemis-crm.cz/
+    items:
+      - Complete solutions in Microsoft Dynamics 365.
+      - Development of CRM solution tailored form customer, including web and mobile applications, migration from different systems, and database administration.
 
 teaching:
-  - role: BI-OOP – Object-Oriented Programming
+  - subject: NI-RUN – Runtime Systems (Teaching Assistant)
+    institution: FIT CTU in Prague
+    years: 2026 – present
+    link: https://courses.fit.cvut.cz/NI-RUN
+    note: Introduction to the world of virtual machines for high-level programming languages.
+
+  - subject: BI-OOP – Object-Oriented Programming (Teaching Assistant)
     institution: FIT CTU in Prague
     years: 2023 – present
+    link: https://courses.fit.cvut.cz/BI-OOP
     note: Advanced concepts of OOP at the end of undergraduate CS program.
+
+thesis_supervision:
+  - title: Implementation of a Smalltalk Virtual Machine in Zig
+    student: Jan Řehoř
+    level: Bachelor
+    year: 2026
+    link: https://dspace.cvut.cz/entities/publication/77c6c24e-508f-4dbf-a821-1adef5cfb1f1
 
 other:
   - role: Student Volunteer Co-Chair

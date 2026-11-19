@@ -1,8 +1,5 @@
 {%- comment -%}
-  Assigns `pub_years`: distinct years in publications.yml, newest first.
+  Assigns `pub_years`: publications grouped by year, newest first.
+  Each group is { name: <year>, items: [[slug, publication], ...] }.
 {%- endcomment -%}
-{%- assign pub_years = "" | split: "" -%}
-{%- for entry in site.data.publications -%}
-  {%- assign pub_years = pub_years | push: entry[1].info.year -%}
-{%- endfor -%}
-{%- assign pub_years = pub_years | uniq | sort | reverse -%}
+{%- assign pub_years = site.data.publications | group_by_exp: "entry", "entry[1].info.year" | sort: "name" | reverse -%}

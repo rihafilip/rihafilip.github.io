@@ -10,7 +10,9 @@ permalink: /cv/
 
 ## Education
 {% for e in site.data.cv.education %}
-**{{ e.degree }}**, {{ e.institution }} <span class="cv-meta">({{ e.years }})</span>{% if e.note %}<br>{{ e.note }}{% endif %}
+**{{ e.degree }}** <span class="cv-meta">({{ e.years }})</span>  
+<span class="cv-meta">{{ e.institution }}</span>  
+{% if e.note %}{{ e.note }}{% endif %}
 {% endfor %}
 
 ## Research
@@ -23,13 +25,20 @@ permalink: /cv/
 
 ## Publications and Talks
 {% include pub-years.html %}
-{% for year in pub_years %}{% for entry in site.data.publications %}{% assign p = entry[1] %}{% if p.info.year == year %}
+{% for year in pub_years %}{% for entry in year.items %}{% assign p = entry[1] %}
 - {{ p.authors | join: ", " }} ({{ p.info.year }}). [*{{ p.title }}*]({{ '/publications/' | relative_url | append: '#' | append: entry[0] }}).{% if p.info.venue %} {{ p.info.venue }}.{% endif %}{% if p.info.type == "Talk" %} Talk.{% endif %}
-{% endif %}{% endfor %}{% endfor %}
+{% endfor %}{% endfor %}
 
 ## Teaching
 {% for t in site.data.cv.teaching %}
-**{{ t.role }}**, {{ t.institution }} <span class="cv-meta">({{ t.years }})</span>{% if t.note %}<br>{{ t.note }}{% endif %}
+**{{ t.subject }}** <span class="cv-meta">({{ t.years }})</span>  
+{{ t.note }}
+{% endfor %}
+
+## Thesis Supervision
+{% for t in site.data.cv.thesis_supervision %}
+**[{{ t.title }}]({{ t.link }}) ({{ t.level }} thesis)** <span class="cv-meta">({{ t.year }})</span>  
+{{ t.student }}
 {% endfor %}
 
 ## Other Activities

@@ -1,5 +1,6 @@
 # icon: Font Awesome (fa-solid / fa-brands) or Academicons (ai) classes
 links:
-  - { label: GitHub,         url: "https://github.com/rihafilip", icon: fa-brands fa-github }
-  - { label: ORCID,          url: "https://orcid.org/0009-0009-3933-2997", icon: ai ai-orcid }
-  - { label: Email,          url: "mailto:riha.fina@gmail.com" }
+  - { label: GitHub, url: "https://github.com/rihafilip", icon: fa-brands fa-github }
+  - { label: Google Scholar, url: "https://scholar.google.com/citations?user=w9TEpsIAAAAJ", icon: ai ai-google-scholar }
+  - { label: ORCID, url: "https://orcid.org/0009-0009-3933-2997", icon: ai ai-orcid }
+  - { label: Email, url: "mailto:riha.fina@gmail.com" }

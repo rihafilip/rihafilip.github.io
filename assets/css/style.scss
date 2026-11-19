@@ -84,6 +84,13 @@ a:hover { color: darken($link, 12%); }
 .btn:hover { background: $link; color: #fff; }
 .btn:hover { background: darken($link, 12%); }
 
+.pill {
+  display: inline-block; vertical-align: middle;
+  padding: .1rem .6rem; border: 1.5px solid $link; border-radius: 4px;
+  font-family: "Source Sans 3", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: .8rem; font-weight: 600; line-height: 1.4; color: $link;
+}
+
 @media (prefers-color-scheme: dark) {
   body                 { background: #111418; color: #c9ccd1; }
   h1, h2, h3, h4, h5, h6,
@@ -103,4 +110,5 @@ a:hover { color: darken($link, 12%); }
   .pub-entry summary:hover .pub-entry-title { color: #9ccaff; }
   .btn, .btn:hover     { background: #6cb0ff; color: #111418; }
   .btn:hover           { background: #9ccaff; }
+  .pill                { border-color: #6cb0ff; color: #6cb0ff; }
 }

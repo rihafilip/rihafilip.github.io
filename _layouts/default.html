@@ -10,19 +10,17 @@
   <body>
     <div class="wrapper">
       <header>
-        {% if site.logo %}
-          <img class="avatar" src="{{ site.logo | relative_url }}" alt="Photo of {{ site.title }}">
-        {% endif %}
+        <img class="avatar" src="{{ site.logo | relative_url }}" alt="Photo of {{ site.title }}">
         <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
         <p>{{ site.description }}</p>
 
         <ul class="profile-links">
           {% for l in site.data.profile.links %}
-          {% if l.icon %}
-            <li><a href="{{ l.url | relative_url }}">
-              <i class="{{ l.icon }}" aria-hidden="true"></i>
-            </a></li>
-          {% endif %}
+            {% if l.icon %}
+              <li><a href="{{ l.url | relative_url }}">
+                <i class="{{ l.icon }}" aria-hidden="true"></i>
+              </a></li>
+            {% endif %}
           {% endfor %}
         </ul>
 

@@ -1,25 +1,33 @@
 ---
 layout: default
-title: Publications
+title: Publications and Talks
 permalink: /publications/
 ---
 
-<h1>Publications</h1>
+<h1>Publications and Talks</h1>
 {% include pub-years.html %}
 
 {% for year in pub_years %}
-<h2 class="pub-year">{{ year }}</h2>
+<h2 class="pub-year">{{ year.name }}</h2>
 <hr>
 
 <ul class="pub-list">
-{% for entry in site.data.publications %}
+{% for entry in year.items %}
   {% assign slug = entry[0] %}
   {% assign p = entry[1] %}
-  {% if p.info.year != year %}{% continue %}{% endif %}
 
-  {% if p.media.file == true %}{% assign file = slug | append: '.pdf' %}{% else %}{% assign file = p.media.file %}{% endif %}
-  {% if p.media.presentation == true %}{% assign presentation = slug | append: '-presentation.pdf' %}{% else %}{% assign presentation = p.media.presentation %}{% endif %}
-  {% if p.media.poster == true %}{% assign poster = slug | append: '-poster.pdf' %}{% else %}{% assign poster = p.media.poster %}{% endif %}
+  {% if p.media.file == true %}{% assign file = slug | append: '.pdf' %}
+  {% else %}{% assign file = p.media.file %}
+  {% endif %}
+
+  {% if p.media.presentation == true %}{% assign presentation = slug | append: '-presentation.pdf' %}
+  {% else %}{% assign presentation = p.media.presentation %}
+  {% endif %}
+
+  {% if p.media.poster == true %}{% assign poster = slug | append: '-poster.pdf' %}
+  {% else %}{% assign poster = p.media.poster %}
+  {% endif %}
+
   {% capture reference_url %}{% include pub-url.html ref=p.info.reference %}{% endcapture %}
   {% capture artifact_url %}{% include pub-url.html ref=p.media.artifact %}{% endcapture %}
   {% capture video_url %}{% include pub-url.html link=p.media.video %}{% endcapture %}
@@ -27,23 +35,31 @@ permalink: /publications/
   <li class="pub-entry" id="{{ slug }}">
     <details>
       <summary>
-        <h3 class="pub-entry-title">{{ p.title }}{% if p.info.type != "Paper" %} ({{ p.info.type }}){% endif %}</h3>
-        {% if p.info.venue %}<span class="pub-venue">{{ p.info.venue }}</span>{% endif %}
+        <h3 class="pub-entry-title">{{ p.title }}{% if p.info.type != "Paper" %} <span class="pill">{{ p.info.type }}</span>{% endif %}</h3>
+        {% if p.info.venue %}
+          <span class="pub-venue">{{ p.info.venue }}</span>
+        {% endif %}
         <span class="pub-authors">{{ p.authors | join: ", " }}</span>
       </summary>
 
       <div class="pub-details">
         {% if file or presentation or poster or reference_url != "" or artifact_url != "" or video_url != "" %}
-        <p class="pub-buttons">
-          {% if file %}<a class="btn" target="_blank" rel="noopener" href="{{ file | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i>View PDF</a>{% endif %}
-          {% if reference_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ reference_url }}"><i class="fa-regular fa-file-lines" aria-hidden="true"></i>Paper</a>{% endif %}
-          {% if artifact_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ artifact_url }}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i>Artifact</a>{% endif %}
-          {% if presentation %}<a class="btn" target="_blank" rel="noopener" href="{{ presentation | prepend: '/media/' | relative_url }}"><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i>Slides</a>{% endif %}
-          {% if poster %}<a class="btn" target="_blank" rel="noopener" href="{{ poster | prepend: '/media/' | relative_url }}"><i class="fa-regular fa-image" aria-hidden="true"></i>Poster</a>{% endif %}
-          {% if video_url != "" %}<a class="btn" target="_blank" rel="noopener" href="{{ video_url }}"><i class="fa-solid fa-video" aria-hidden="true"></i>Video</a>{% endif %}
-        </p>
+          <p class="pub-buttons">
+            {% include btn.html media=file icon="fa-regular fa-file-pdf" label="View PDF" %}
+            {% assign reference_label = p.info.reference_name | default: "Paper" %}
+            {% include btn.html href=reference_url icon="fa-regular fa-file-lines" label=reference_label %}
+            {% include btn.html href=artifact_url icon="fa-solid fa-box-archive" label="Artifact" %}
+            {% include btn.html media=presentation icon="fa-solid fa-person-chalkboard" label="Slides" %}
+            {% include btn.html media=poster icon="fa-regular fa-image" label="Poster" %}
+            {% include btn.html href=video_url icon="fa-solid fa-video" label="Video" %}
+          </p>
         {% endif %}
         {{ p.abstract | markdownify }}
+        {% if p.info.reference.doi %}
+        <p><b>DOI:</b>
+          <a target="_blank" rel="noopener" href="https://doi.org/{{ p.info.reference.doi }}">{{ p.info.reference.doi }}</a>
+        </p>
+        {% endif %}
       </div>
     </details>
   </li>

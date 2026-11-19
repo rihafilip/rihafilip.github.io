@@ -8,6 +8,7 @@
 #       venue: optional; string
 #       year: int
 #       reference: optional; reference
+#       reference_name: name the reference; by default "Paper"
 #       type: Paper | Talk | Poster | Extended Abstract | ...
 #     media: all fields optional
 #       file: if true - at media/'slug'.pdf; if string - at media/'the-string'
@@ -95,9 +96,23 @@
     file: true
     presentation: true
   bib:
-    type: misc
+    exclude: true
   abstract: |
     Dynamic languages such as Python, Ruby, or R rely heavily on native C/C++ functions using a foreign function interface. While they significantly speed up baseline performance, these functions are opaque to a Just-in-time compiler — parameter and return types, side effects, and argument counts are not exposed for optimization. We propose an approach that analyzes native code in the context of the host VM, opening up the semantics of native code without the need for manual transformation. From this we identify three use cases: a) inferring precise types and side effects for JIT specialization, b) modeling the dynamic language semantics in the same IR, enabling whole-program analysis, and c) extracting specialized native code slices that only capture the main logic for subsets of inputs.
+
+2026-student-pl-grow-languages:
+  title: "How do we grow our languages?"
+  authors:
+    - Filip Říha
+  info:
+    venue: PRG-PRG Student PL Meetup
+    year: 2026
+    type: Talk
+  media:
+    video: https://youtu.be/33xgjCdcJRw?si=0f-kG4NEbXvEYLoT
+  bib:
+    exclude: true
+
 
 2025-programming-lightning-talk:
   title: "Understanding Feedback Information in Just-in-Time Compilers"
@@ -108,7 +123,7 @@
     year: 2025
     type: Talk
   bib:
-    type: misc
+    exclude: true
   abstract: |
     Feedback information is used by Just-in-time compilers as the piece that glues together the runtime and the static worlds by enriching static type information with runtime observations. The compiler can speculate on the observed behavior, which is crucial for unlocking a number of optimizations. The more dynamic features a language has, the more relevant the runtime information becomes when generating performant code. This is the case with R, a highly dynamic programming language that combines delayed evaluation and side effects with first-class environments and full reflective capabilities that can even access and modify the state of stack frames at any time. However, recording feedback information considerably impacts the execution and memory of an interpreter, which leads to the question: Is all the information recorded really needed? In this study, we look at how the feedback information is used in Ř, a just-in-time compiler for the language R. We perform a study on a set of well-known benchmarks and a few real-world programs, reporting on the feedback usage and categorizing how the information is used (or not used) during a compilation.
 
@@ -119,6 +134,7 @@
   info:
     year: 2025
     reference: { link: dspace.cvut.cz/entities/publication/ee3e3810-343c-4971-8590-6412428394db }
+    reference_name: Thesis
     type: Master Thesis
   media:
     file: true
@@ -161,6 +177,7 @@
   info:
     year: 2023
     reference: { link: dspace.cvut.cz/entities/publication/c01c0b86-9ef9-4e82-b87a-58def55f1ed9 }
+    reference_name: Thesis
     type: Bachelor Thesis
   media:
     file: true

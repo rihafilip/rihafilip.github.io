@@ -1,0 +1,14 @@
+{%- comment -%}
+  Link button opening in a new tab. Renders nothing when there is no target.
+  Params: href (external URL) or media (file name under /media/), icon (Font Awesome classes), label.
+{%- endcomment -%}
+{%- if include.media -%}
+  {%- assign btn_href = include.media | prepend: '/media/' | relative_url -%}
+{%- else -%}
+  {%- assign btn_href = include.href -%}
+{%- endif -%}
+{%- if btn_href and btn_href != "" -%}
+<a class="btn" target="_blank" rel="noopener" href="{{ btn_href }}">
+  <i class="{{ include.icon }}" aria-hidden="true"></i>{{ include.label }}
+</a>
+{%- endif -%}

@@ -114,6 +114,7 @@
     type: Talk
   media:
     video: https://youtu.be/33xgjCdcJRw?si=0f-kG4NEbXvEYLoT
+    presentation: true
   bib:
     exclude: true
 
